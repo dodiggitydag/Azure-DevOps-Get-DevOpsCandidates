@@ -12,13 +12,13 @@ This Cmdlet determines what changesets are candidates for merging/promotion/push
 1) Find and replace all "DevOpsProject" with the name of the project on which you are working.
 
 2) In order to make sure TF.exe knows which collection to query, run this and authenticate to Azure DevOps:
-    "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\TF.exe" workspaces /collection:https://dev.azure.com/mcaconnectv1
+    "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer\TF.exe" workspaces /collection:https://dev.azure.com/MyOrganization
 
 After authenticating, you should get this back:
 
-    Collection: https://mcaconnectv1.visualstudio.com/
+    Collection: https://dev.azure.com/MyOrganization/
     Workspace Owner        Computer  Comment
-    --------- ------------ --------- --------------------------------------------------------------------------------------
+    --------- ------------ --------- --------------------------------------------------
     MCADAG-02 Dag Calafell MCADAG-02
 
 
@@ -33,19 +33,12 @@ After authenticating, you should get this back:
 Get-DevOpsCandidates "$/DevOpsProject/DaxDevMca1" "$/DevOpsProject/Trunk"
 
 # Example 2: Save output as CSV
-[string[]]$devBranches = "$/DevOpsProject/DaxDevMca1", "$/DevOpsProject/DaxDevMca2", "$/DevOpsProject/DaxDevMca3", "$/DevOpsProject/DaxDevMca4", "$/DevOpsProject/DaxDevMca5", "$/DevOpsProject/DaxDevMca6", "$/DevOpsProject/DaxDevMca7", "$/DevOpsProject/DaxDevMca8", "$/DevOpsProject/DaxDevMca9", "$/DevOpsProject/DaxDevMca10", "$/DevOpsProject/DaxDevMca11", "$/DevOpsProject/DaxDevMca12"
+[string[]]$devBranches = "$/DevOpsProject/dev1", "$/DevOpsProject/dev2", "$/DevOpsProject/dev3", "$/DevOpsProject/dev4", "$/DevOpsProject/dev5", "$/DevOpsProject/dev6", "$/DevOpsProject/dev7", "$/DevOpsProject/dev8", "$/DevOpsProject/dev9", "$/DevOpsProject/dev10", "$/DevOpsProject/dev11", "$/DevOpsProject/dev12"
 [string]$promoteToBranch = "$/DevOpsProject/Trunk"
 
 $CandidateChangeSets = Get-DevOpsCandidates $devBranches $promoteToBranch
 $CandidateChangeSets | Format-Table *
 $CandidateChangeSets | Export-Csv -NoTypeInformation -Path "$env:USERPROFILE\Desktop\Promotion Candidates for Trunk.csv"
-
-##############################################
-                Change Log
-##############################################
-
-2018-12-19  Dag Calafell  Initial creation of script
-2019-01-26  Dag Calafell  Conversion to Cmdlet
 
 #>
 
