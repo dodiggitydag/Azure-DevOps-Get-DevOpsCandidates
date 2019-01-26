@@ -21,7 +21,7 @@ After authenticating, you should get this back:
 ### Import this function
 
 ```powershell
-. '.\Azure DevOps Source Control.ps1'
+. '.\Get-DevOpsCandidates.ps1'
 ```
 
 ### Example 1: Get candidates to promote from one branch to another
